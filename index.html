@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
+  <script src="/credentials.js"></script>
+  <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+  <title>This Is Just a Dummy App</title>
+</head>
+<body>
+
+  <h1>Let's see if this Google login thing works</h1>
+  <div class="g-signin2" data-onsuccess="onSignIn">
+    <!-- <button>Click here</button> -->
+  </div>
+  <script type="text/javascript">
+    document.getElementsByName("google-signin-client_id")[0].content = credentials.web.client_id
+    // console.log(document.getElementsByName("google-signin-client_id")[0].content)
+  </script>
+
+  <script type="text/javascript">
+    function init() {
+      gapi.load('auth2', function() {
+        console.log('auth2 loaded, maybe?');
+        gapi.auth2.init({
+          client_id: credentials.web.client_id
+        })
+      })
+    }
+  </script>
+
+  <script type="text/javascript">
+    function onSignIn(googleUser) {
+      var profile = googleUser.getBasicProfile();
+      console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+      console.log('Name: ' + profile.getName());
+      console.log('Image URL: ' + profile.getImageUrl());
+      console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    }
+  </script>
+
+</body>
+
+</html>
